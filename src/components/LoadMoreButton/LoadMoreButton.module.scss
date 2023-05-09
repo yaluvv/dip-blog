@@ -1,0 +1,19 @@
+.moreBtn {
+    margin-top: 193px;
+    padding: 18px 43px;
+    font-size: 24px;
+    letter-spacing: -0.5px;
+    border-radius: 20px;
+    color: #ff5480;
+    border: 1px solid currentColor;
+    transition: all 0.4s ease-in;
+    position: relative;
+
+    &:hover {
+        background-color: #ff5480;
+        color: #ffffff;
+    }
+    &:active {
+        top: -2px;
+    }
+}

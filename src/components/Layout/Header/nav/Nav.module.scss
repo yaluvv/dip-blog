@@ -1,0 +1,18 @@
+.nav {
+    .navList {
+        display: flex;
+        align-items: center;
+        column-gap: 30px;
+    }
+    .newBtn {
+        padding: 5px 16px;
+        background: #ff5480;
+        border-radius: 10px;
+        color: #ffffff;
+        transition: background 0.3s ease;
+
+        &:hover {
+            background: darken($color: #ff5480, $amount: 10);
+        }
+    }
+}

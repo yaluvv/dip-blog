@@ -17,6 +17,7 @@ body {
     font-size: 16px;
     background: #f9f9fb;
     color: $primary1;
+    height: 100%;
 }
 
 ul,
@@ -46,7 +47,19 @@ img {
     max-width: 100%;
     height: auto;
 }
+#root {
+    min-height: 100vh;
+}
 
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
 .container {
     max-width: 1200px;
     margin: 0 auto;

@@ -1,0 +1,59 @@
+.authForm {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    max-width: 400px;
+    border-radius: 10px;
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 20px;
+        padding: 10px;
+
+        label {
+            width: 100%;
+        }
+
+        input {
+            width: 100%;
+            border-radius: 5px;
+            padding: 10px 5px;
+            border: none;
+            width: 100%;
+            background-color: rgba($color: #e3e3e3, $alpha: 0.2);
+        }
+    }
+
+    &Btn {
+        width: 100%;
+        padding: 10px 16px;
+        background: #ff5480;
+        border-radius: 5px;
+        color: #ffffff;
+        transition: background 0.3s ease;
+        margin-bottom: 20px;
+
+        &:hover {
+            background: darken($color: #ff5480, $amount: 10);
+        }
+    }
+
+    &Sub {
+        font-weight: 400;
+        line-height: 2;
+
+        button {
+            padding: 5px 16px;
+            background: #323132;
+            color: #fff;
+            border-radius: 5px;
+            margin-left: 10px;
+            transition: background 0.3s ease;
+
+            &:hover {
+                background: lighten($color: #323132, $amount: 10);
+            }
+        }
+    }
+}

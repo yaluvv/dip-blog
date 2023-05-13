@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Main from "../pages/main/Main";
 import FullPost from "../pages/full-post/FullPost";
 import Layout from "./Layout/Layout";
+import Auth from "../pages/auth/Auth";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
             />
           }
         />
+        <Route path="/auth" element={<Auth />} />
         <Route path="*" element={<h1>404</h1>} />
       </Routes>
     </Layout>

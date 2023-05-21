@@ -1,17 +1,18 @@
+import { Link } from "react-router-dom";
 import styles from "./UserMenu.module.scss";
+import { useState } from "react";
+
+const initialState = [{ title: "Login/Signup", link: "/auth" }];
 
 const UserMenu = () => {
+  const [list, setList] = useState(initialState);
   return (
     <div className={styles.userMenu}>
-      <p>setting1setting1setting1setting1</p>
-      <p>setting2</p>
-      <p>setting3</p>
-      <p>setting1</p>
-      <p>setting2</p>
-      <p>setting3</p>
-      <p>setting1</p>
-      <p>setting2</p>
-      <p>setting3</p>
+      {list.map((item) => (
+        <Link key={item.link} to={item.link}>
+          {item.title}
+        </Link>
+      ))}
     </div>
   );
 };

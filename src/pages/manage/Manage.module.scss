@@ -1,0 +1,19 @@
+.manage {
+    padding: 20px 0;
+
+    .btnPost {
+        margin-bottom: 30px;
+    }
+    .title {
+        margin-bottom: 20px;
+        font-size: 42px;
+    }
+    .postList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    .moreBtn {
+        margin: 100px auto 0;
+    }
+}

@@ -1,8 +1,8 @@
 import styles from "./LoadMoreButton.module.scss";
 
-const LoadMoreButton = () => {
+const LoadMoreButton = ({ className }) => {
   return (
-    <button type="button" className={`btn ${styles.moreBtn}`}>
+    <button type="button" className={`btn ${styles.moreBtn} ${className}`}>
       Load More
     </button>
   );

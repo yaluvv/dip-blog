@@ -1,12 +1,41 @@
 import styles from "./AuthForm.module.scss";
 import InputField from "./InputField";
+import { useForm } from "react-hook-form";
 
 const AuthForm = ({ type, setFormType }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    mode: "onChange",
+  });
+  const onSubmit = (data) => console.log(data);
+
   return (
     <div className={styles.authForm}>
-      <form>
-        <InputField type={"email"} placeholder={"Enter your email"} />
-        <InputField type={"password"} placeholder={"Enter your password"} />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <InputField
+          {...register("email", {
+            required: "This is requried",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Invalid email address",
+            },
+          })}
+          type={"email"}
+          placeholder={"Enter your email"}
+          error={errors?.email?.message}
+        />
+        <InputField
+          {...register("password", {
+            required: "This is requried",
+            minLength: { value: 6, message: "Min length 6" },
+          })}
+          type={"password"}
+          placeholder={"Enter your password"}
+          error={errors?.password?.message}
+        />
         {type === "login" && (
           <button className={`btn ${styles.authFormBtn}`}>Login</button>
         )}

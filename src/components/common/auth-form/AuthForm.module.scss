@@ -14,15 +14,6 @@
         label {
             width: 100%;
         }
-
-        input {
-            width: 100%;
-            border-radius: 5px;
-            padding: 10px 5px;
-            border: none;
-            width: 100%;
-            background-color: rgba($color: #e3e3e3, $alpha: 0.2);
-        }
     }
 
     &Btn {
@@ -56,4 +47,24 @@
             }
         }
     }
+}
+
+.input {
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px 5px;
+    border: none;
+    width: 100%;
+    background-color: rgba($color: #e3e3e3, $alpha: 0.2);
+    border: 1px solid gray;
+    outline: none;
+}
+
+.errorText {
+    display: inline-block;
+    margin-top: 10px;
+    color: #ee4747;
+}
+.errorInput {
+    border: 2px solid #ee4747;
 }

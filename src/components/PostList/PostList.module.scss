@@ -1,6 +1,6 @@
 .postList {
-    padding-top: 120px;
-    padding-bottom: 219px;
+    padding-top: 60px;
+    padding-bottom: 100px;
 
     .btn {
         align-self: flex-start;
@@ -26,5 +26,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+    .moreBtn {
+        margin-top: 190px;
     }
 }

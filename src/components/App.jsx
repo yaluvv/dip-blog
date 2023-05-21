@@ -3,6 +3,8 @@ import Main from "../pages/main/Main";
 import FullPost from "../pages/full-post/FullPost";
 import Layout from "./Layout/Layout";
 import Auth from "../pages/auth/Auth";
+import Manage from "../pages/manage/Manage";
+import Profile from "../pages/manage/profile/Profile";
 
 const App = () => {
   return (
@@ -24,6 +26,8 @@ const App = () => {
           }
         />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/manage" element={<Manage />} />
+        <Route path="/manage/profile" element={<Profile />} />
         <Route path="*" element={<h1>404</h1>} />
       </Routes>
     </Layout>

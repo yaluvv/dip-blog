@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import LoadMoreButton from "../LoadMoreButton/LoadMoreButton";
 import Post from "../Post/Post";
 import styles from "./PostList.module.scss";
@@ -62,10 +63,12 @@ const PostList = () => {
             }
           >
             {arrPosts.map((post) => (
-              <Post {...post} />
+              <Link key={post.id} to={`post/${post.id}`}>
+                <Post {...post} />
+              </Link>
             ))}
           </div>
-          <LoadMoreButton />
+          <LoadMoreButton className={styles.moreBtn} />
         </div>
       </div>
     </section>

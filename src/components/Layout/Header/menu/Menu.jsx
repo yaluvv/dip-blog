@@ -21,7 +21,7 @@ const Menu = () => {
       <button className={styles.menuBtn}>
         <SearchIcon />
       </button>
-      <div className={styles.d}>{t && <UserMenu />}</div>
+      <div className={styles.userMenuWrapper}>{t && <UserMenu />}</div>
     </div>
   );
 };

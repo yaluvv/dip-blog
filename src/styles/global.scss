@@ -1,0 +1,94 @@
+@import "./libs/normalize";
+
+@import "./fonts";
+@import "./vars";
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    background: #f9f9fb;
+    color: $primary1;
+    height: 100%;
+}
+
+ul,
+li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+p {
+    margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+#root {
+    min-height: 100vh;
+}
+.text-center {
+    text-align: center;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.btn {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &--gray {
+        padding: 10px;
+        border-radius: 10px;
+        color: #fff;
+        background-color: #242424;
+        transition: all 0.3s ease;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+}
+.heading {
+    font-size: 42px;
+}

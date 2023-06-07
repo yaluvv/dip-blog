@@ -1,0 +1,33 @@
+.postList {
+    padding-top: 60px;
+    padding-bottom: 100px;
+
+    .btn {
+        align-self: flex-start;
+        margin-bottom: 20px;
+        background-color: #242323;
+        color: #ffffff;
+        border-radius: 5px;
+        padding: 6px;
+    }
+
+    .posts {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        row-gap: 105px;
+
+        &Row {
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+    }
+    .postsInner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .moreBtn {
+        margin-top: 190px;
+    }
+}

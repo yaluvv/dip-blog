@@ -1,0 +1,11 @@
+.logo {
+    font-weight: 600;
+    font-style: italic;
+    font-size: 34px;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: skew(5deg);
+        color: #ff5480;
+    }
+}

@@ -1,0 +1,29 @@
+.menu {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+
+    .menuBtn {
+        width: 24px;
+        height: 24px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+
+        svg {
+            width: 24px;
+            height: 24px;
+            object-fit: cover;
+        }
+
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+    .userMenuWrapper {
+        position: absolute;
+        top: 40px;
+        right: -7px;
+    }
+}

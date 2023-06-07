@@ -1,0 +1,61 @@
+.profile {
+    padding: 30px 0;
+    &Header {
+        min-height: 350px;
+        border-radius: 10px;
+        background-image: url("/manage.jpg");
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    &Info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+
+        .title {
+            margin-bottom: 20px;
+        }
+    }
+
+    &Data {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 20px;
+
+        span {
+            display: inline-block;
+            border-radius: 10px;
+            color: #fff;
+            background-color: #ff5480;
+            padding: 10px;
+        }
+    }
+
+    .btnChange {
+        margin-bottom: 70px;
+        padding: 10px;
+        border-radius: 10px;
+        color: #fff;
+        background-color: #242424;
+        transition: all 0.3s ease;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
+    form {
+        padding: 30px;
+        box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+        border-radius: 10px;
+        background-color: #ececec72;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        max-width: 500px;
+    }
+}

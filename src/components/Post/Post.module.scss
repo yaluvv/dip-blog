@@ -1,0 +1,36 @@
+.post {
+    max-width: 972px;
+    &Content {
+        margin-top: 20px;
+
+        > h3 {
+            font-size: 48px;
+            line-height: 61px;
+            letter-spacing: -0.3px;
+            color: #111210;
+        }
+    }
+
+    &Info {
+        display: flex;
+        column-gap: 10px;
+        margin-bottom: 6px;
+        > span {
+            text-transform: uppercase;
+            font-weight: 400;
+            font-size: 16px;
+            letter-spacing: -0.1px;
+            color: #9b9b9b;
+            margin-right: 10px;
+        }
+    }
+    &Img {
+        border-radius: 10px;
+        > img {
+            display: block;
+            border-radius: inherit;
+            object-fit: contain;
+            object-position: center;
+        }
+    }
+}

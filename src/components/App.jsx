@@ -1,30 +1,25 @@
 import { Route, Routes } from "react-router-dom";
-import Main from "../pages/main/Main";
+import Home from "../pages/home/Home";
 import FullPost from "../pages/full-post/FullPost";
 import Layout from "./Layout/Layout";
 import Auth from "../pages/auth/Auth";
 import Manage from "../pages/manage/Manage";
 import Profile from "../pages/manage/profile/Profile";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { authMe } from "../redux/slices/authSlice";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authMe());
+  }, []);
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route
-          path="/post/:id"
-          element={
-            <FullPost
-              title={"Lorem ipsum dolor sit amet consectetur"}
-              description={
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis enim vel qui voluptatibus placeat architecto commodi aliquam pariatur quos porro."
-              }
-              image={"../../rene.jpg"}
-              author={"Alexander Puzikov"}
-              category={"Travel"}
-            />
-          }
-        />
+        <Route path="/" element={<Home />} />
+        <Route path="/post/:id" element={<FullPost />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/manage" element={<Manage />} />
         <Route path="/manage/profile" element={<Profile />} />

@@ -3,7 +3,7 @@ import styles from "./Auth.module.scss";
 import AuthForm from "../../components/common/auth-form/AuthForm";
 
 const Auth = () => {
-  const [formType, setFormType] = useState("signup");
+  const [formType, setFormType] = useState("login");
   return (
     <section className={styles.auth}>
       <div className="container">

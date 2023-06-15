@@ -1,7 +1,7 @@
 import PostList from "../../components/PostList/PostList";
 
-const Main = () => {
+const Home = () => {
   return <PostList />;
 };
 
-export default Main;
+export default Home;

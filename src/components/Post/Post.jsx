@@ -1,18 +1,19 @@
 import styles from "./Post.module.scss";
 
-const Post = ({ title, description, author, category, id }) => {
+const Post = ({ title, imageUrl, user, tags, viewsCount }) => {
   return (
     <div className={styles.post}>
       <div className={styles.postImg}>
-        <img src="./rene.jpg" alt="" />
+        <img src={imageUrl} alt="" />
       </div>
 
       <div className={styles.postContent}>
         <div className={styles.postInfo}>
           <span>by</span>
-          <p>{author}</p>
+          <p>{user.fullName}</p>
           <span>in</span>
-          <p>{category}</p>
+          <p>{tags.join("")}</p>
+          <span>{viewsCount}</span>
         </div>
         <h3>{title}</h3>
       </div>

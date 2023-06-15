@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./UserMenu.module.scss";
+import { useAuth } from "../../../../hooks/useAuth";
+import UserMenuAuth from "./UserMenuAuth";
 
 const initialState = [{ title: "Login/Signup", link: "/auth" }];
 const userLinks = [
@@ -8,17 +10,13 @@ const userLinks = [
 ];
 
 const UserMenu = () => {
-  const user = true;
+  const { isAuth } = useAuth();
+
   return (
     <div className={styles.userMenu}>
-      {user &&
-        userLinks.map((item) => (
-          <Link key={item.link} to={item.link}>
-            {item.title}
-          </Link>
-        ))}
+      {isAuth && <UserMenuAuth />}
 
-      {!user &&
+      {!isAuth &&
         initialState.map((item) => (
           <Link key={item.link} to={item.link}>
             {item.title}

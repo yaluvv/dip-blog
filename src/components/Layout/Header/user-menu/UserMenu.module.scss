@@ -3,8 +3,35 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(187, 187, 187, 0.9);
-    padding: 5px;
+    background-color: rgb(214 214 214 / 90%);
+    padding: 20px;
     min-height: 100px;
     border-radius: 10px;
+
+    a {
+        font-size: 18px;
+        transition: color 0.3s ease;
+
+        &:not(:last-child) {
+            margin-bottom: 10px;
+        }
+
+        &:hover {
+            color: #ff5480;
+        }
+    }
+    button {
+        margin-top: 10px;
+        padding: 10px;
+        border: transparent;
+        background: #000;
+        color: #ffffff;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+
+        &:hover {
+            background: #ff5480;
+        }
+    }
 }

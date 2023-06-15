@@ -2,52 +2,27 @@ import { Link } from "react-router-dom";
 import LoadMoreButton from "../LoadMoreButton/LoadMoreButton";
 import Post from "../Post/Post";
 import styles from "./PostList.module.scss";
-import React from "react";
-
-const arrPosts = [
-  {
-    id: 1,
-    title: "Test1",
-    description: "Test1 desc",
-    author: "Alex Puzikov",
-    category: "Test",
-  },
-  {
-    id: 2,
-    title: "Test2",
-    description: "Test2 desc",
-    author: "Alex Puzikov",
-    category: "Test",
-  },
-  {
-    id: 3,
-    title: "Test3",
-    description: "Test3 desc",
-    author: "Alex Puzikov",
-    category: "Test",
-  },
-  {
-    id: 4,
-    title: "Test4",
-    description: "Test4 desc",
-    author: "Alex Puzikov",
-    category: "Test",
-  },
-  {
-    id: 5,
-    title: "Test5",
-    description: "Test5 desc",
-    author: "Alex Puzikov",
-    category: "Test",
-  },
-];
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllPosts, fetchAllTags } from "../../redux/slices/postSlice";
 
 const PostList = () => {
   const [isRowPosts, setIsRowPosts] = React.useState(false);
+  const dispatch = useDispatch();
+  const { items, loading, errors } = useSelector((state) => state.posts.posts);
+  // console.log(items);
+
+  // console.log(loading);
+
+  useEffect(() => {
+    dispatch(fetchAllPosts());
+    dispatch(fetchAllTags());
+  }, []);
 
   const handleChange = () => {
     setIsRowPosts((prev) => !prev);
   };
+
   return (
     <section className={styles.postList}>
       <div className="container">
@@ -62,11 +37,16 @@ const PostList = () => {
               isRowPosts ? `${styles.posts} ${styles.postsRow}` : styles.posts
             }
           >
-            {arrPosts.map((post) => (
-              <Link key={post.id} to={`post/${post.id}`}>
-                <Post {...post} />
-              </Link>
-            ))}
+            {loading === "rejected" && <h1>{errors.message}</h1>}
+            {loading === "loading" ? (
+              <h1>LOADING!!!</h1>
+            ) : (
+              items.map((item) => (
+                <Link key={item._id} to={`post/${item._id}`}>
+                  <Post {...item} />
+                </Link>
+              ))
+            )}
           </div>
           <LoadMoreButton className={styles.moreBtn} />
         </div>

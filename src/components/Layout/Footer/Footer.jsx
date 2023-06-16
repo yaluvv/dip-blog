@@ -1,11 +1,27 @@
 import styles from "./Footer.module.scss";
 
 const socialItems = [
-  { name: "VK", icon: "../social/Vk.svg", link: "vk.com" },
-  { name: "Twitter", icon: "../social/Twitter.svg", link: "twitter.com" },
-  { name: "Pinterest", icon: "../social/Pinterest.svg", link: "pinterest.com" },
-  { name: "Facebook", icon: "../social/Facebook.svg", link: "facebook.com" },
-  { name: "Instagram", icon: "../social/Instagram.svg", link: "instagram.com" },
+  { name: "VK", icon: "../social/Vk.svg", link: "https://vk.com/yaluvv" },
+  {
+    name: "Twitter",
+    icon: "../social/Twitter.svg",
+    link: "https://twitter.com/yaluvv",
+  },
+  {
+    name: "Pinterest",
+    icon: "../social/Pinterest.svg",
+    link: "https://pinterest.com/yaluvv",
+  },
+  {
+    name: "Facebook",
+    icon: "../social/Facebook.svg",
+    link: "https://facebook.com/yaluvv",
+  },
+  {
+    name: "Instagram",
+    icon: "../social/Instagram.svg",
+    link: "https://instagram.com/yaluvv",
+  },
 ];
 
 const Footer = () => {
@@ -25,7 +41,10 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-          <small>All Rights Reserved 2018 3layers</small>
+          <small>
+            All Rights Reserved 2023.
+            <a href="https://github.com/yaluvv">Yaluvv</a>
+          </small>
         </div>
       </div>
     </footer>

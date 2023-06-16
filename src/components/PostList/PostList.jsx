@@ -2,17 +2,14 @@ import { Link } from "react-router-dom";
 import LoadMoreButton from "../LoadMoreButton/LoadMoreButton";
 import Post from "../Post/Post";
 import styles from "./PostList.module.scss";
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPosts, fetchAllTags } from "../../redux/slices/postSlice";
 
 const PostList = () => {
-  const [isRowPosts, setIsRowPosts] = React.useState(false);
+  const [isRowPosts, setIsRowPosts] = useState(false);
   const dispatch = useDispatch();
   const { items, loading, errors } = useSelector((state) => state.posts.posts);
-  // console.log(items);
-
-  // console.log(loading);
 
   useEffect(() => {
     dispatch(fetchAllPosts());

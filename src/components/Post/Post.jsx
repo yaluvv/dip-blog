@@ -4,7 +4,11 @@ const Post = ({ title, imageUrl, user, tags, viewsCount }) => {
   return (
     <div className={styles.post}>
       <div className={styles.postImg}>
-        <img src={imageUrl} alt="" />
+        {imageUrl ? (
+          <img src={`http://localhost:4444${imageUrl}`} alt="" />
+        ) : (
+          <div className={styles.postNotImg}></div>
+        )}
       </div>
 
       <div className={styles.postContent}>

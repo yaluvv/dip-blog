@@ -2,6 +2,7 @@
     padding: 20px 0;
 
     .btnPost {
+        display: inline-block;
         margin-bottom: 30px;
     }
     .title {
@@ -10,10 +11,21 @@
     }
     .postList {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 50px;
+
+        &Column {
+            grid-template-columns: 1fr;
+        }
     }
     .moreBtn {
         margin: 100px auto 0;
+    }
+    .changePosBtn {
+        background-color: #242323;
+        color: #ffffff;
+        border-radius: 5px;
+        padding: 6px;
+        margin-left: 20px;
     }
 }

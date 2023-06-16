@@ -2,10 +2,15 @@ import { useParams } from "react-router-dom";
 import styles from "./FullPost.module.scss";
 import { useEffect, useState } from "react";
 import { postService } from "../../services/post.service";
+import ReactMarkdown from "react-markdown";
 
 const FullPost = () => {
   const { id } = useParams();
   const [postData, setPostData] = useState({});
+  console.log(postData);
+  const isImg = Object.values(postData).length
+    ? postData.imageUrl.length
+    : null;
 
   useEffect(() => {
     const getPostById = async () => {
@@ -24,9 +29,17 @@ const FullPost = () => {
     <section className={styles.fullPost}>
       <div className="container">
         <div className={styles.fullPostItem}>
-          <img src={postData.imageUrl} alt="image blog" />
-          <h2>{postData.title}</h2>
-          <p>{postData.text}</p>
+          {isImg ? (
+            <img
+              src={`http://localhost:4444${postData.imageUrl}`}
+              alt="image blog"
+            />
+          ) : (
+            <div className={styles.fullPostItemNotImg}></div>
+          )}
+
+          <span className={styles.fullPostItemTitle}>{postData.title}</span>
+          <ReactMarkdown children={postData.text} />
           <div className={styles.fullPostItemAuthor}>
             <span>by</span>
             <p>{postData.user.fullName}</p>

@@ -30,6 +30,7 @@ export const fetchUserPosts = createAsyncThunk('posts/fetchUserPosts', async (pa
     return data
 })
 
+
 const initialState = {
     posts: {
         items: [],

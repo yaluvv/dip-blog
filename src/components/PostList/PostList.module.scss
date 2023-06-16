@@ -15,7 +15,7 @@
         display: grid;
         grid-template-columns: 1fr;
         justify-items: center;
-        row-gap: 105px;
+        row-gap: 40px;
 
         &Row {
             grid-template-columns: 1fr 1fr;
@@ -29,5 +29,8 @@
     }
     .moreBtn {
         margin-top: 190px;
+    }
+    a {
+        width: 100%;
     }
 }

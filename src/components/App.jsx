@@ -8,6 +8,9 @@ import Profile from "../pages/manage/profile/Profile";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { authMe } from "../redux/slices/authSlice";
+import CreatePost from "../pages/create-post/CreatePost";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -23,8 +26,10 @@ const App = () => {
         <Route path="/auth" element={<Auth />} />
         <Route path="/manage" element={<Manage />} />
         <Route path="/manage/profile" element={<Profile />} />
+        <Route path="/create-post" element={<CreatePost />} />
         <Route path="*" element={<h1>404</h1>} />
       </Routes>
+      <ToastContainer />
     </Layout>
   );
 };

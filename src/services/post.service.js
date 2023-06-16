@@ -36,5 +36,14 @@ export const postService = {
             console.warn(err);
         }
 
-    }
+    },
+    createPost: async (postData) => {
+        try {
+            const { data } = await httpService.post('/posts', postData)
+            return data
+        } catch (err) {
+            console.warn(err);
+            return { name: err.name, code: err.code, message: err.message }
+        }
+    },
 }

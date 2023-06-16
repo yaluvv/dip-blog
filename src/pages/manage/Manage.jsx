@@ -3,18 +3,23 @@ import Post from "../../components/Post/Post";
 import styles from "./Manage.module.scss";
 import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { fetchAllPosts, fetchUserPosts } from "../../redux/slices/postSlice";
 import { Navigate } from "react-router-dom";
 
 const Manage = () => {
+  const [isRowPosts, setIsRowPosts] = useState(false);
   const dispatch = useDispatch();
   const { items, loading, userPosts } = useSelector(
     (state) => state.posts.posts
   );
   const { isAuth, user, loading: userLoading } = useAuth();
   const isAdmin = user?.role === "Admin";
+
+  const handleChangeRow = () => {
+    setIsRowPosts((prev) => !prev);
+  };
 
   useEffect(() => {
     if (userLoading === "loaded") {
@@ -32,22 +37,44 @@ const Manage = () => {
   return (
     <section className={styles.manage}>
       <div className="container">
-        <button className={`btn btn--gray ${styles.btnPost}`}>
+        <Link to={"/create-post"} className={`btn btn--gray ${styles.btnPost}`}>
           Написать статью
+        </Link>
+        <button
+          onClick={handleChangeRow}
+          className={"btn" + " " + styles.changePosBtn}
+        >
+          {!isRowPosts
+            ? "Отобразить в одну колонку"
+            : "Отобразить в две колонки"}
         </button>
         {isAdmin && (
           <>
             <h2 className={`heading ${styles.title}`}>Все посты в блоге</h2>
-            {items.map((post) => (
-              <Link key={post._id} to={`/post/${post._id}`}>
-                <Post {...post} />
-              </Link>
-            ))}
+            <div
+              className={
+                isRowPosts
+                  ? `${styles.postList} ${styles.postListColumn}`
+                  : styles.postList
+              }
+            >
+              {items.map((post) => (
+                <Link key={post._id} to={`/post/${post._id}`}>
+                  <Post {...post} />
+                </Link>
+              ))}
+            </div>
           </>
         )}
 
         {!isAdmin && <h2 className={`heading ${styles.title}`}>Мои посты</h2>}
-        <div className={styles.postList}>
+        <div
+          className={
+            isRowPosts
+              ? `${styles.postList} ${styles.postListColumn}`
+              : styles.postList
+          }
+        >
           {loading === "loaded" &&
             userPosts.map((post) => (
               <Link key={post._id} to={`/post/${post._id}`}>

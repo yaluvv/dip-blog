@@ -3,9 +3,9 @@
     font-style: italic;
     font-size: 34px;
     transition: all 0.3s ease;
+    transform: translateX(-50px);
 
     &:hover {
-        transform: skew(5deg);
         color: #ff5480;
     }
 }

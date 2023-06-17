@@ -1,9 +1,11 @@
 import { httpService } from "./http.service";
 
 export const postService = {
-    getAllPosts: async () => {
+    getAllPosts: async (params) => {
         try {
-            const { data } = await httpService.get('/posts')
+            const { data } = await httpService.get('/posts', {
+                params,
+            })
             return data
         } catch (err) {
             console.warn(err);
@@ -13,7 +15,6 @@ export const postService = {
     getUserPosts: async (params) => {
         try {
             const { data } = await httpService.get('/me/posts', params)
-            console.log(params);
             return data
         } catch (err) {
             console.warn(err);

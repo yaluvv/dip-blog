@@ -30,12 +30,11 @@ const EditPost = () => {
   const handleCreatePost = async () => {
     try {
       const postData = { ...value, imageUrl: img ? img : "" };
-      console.log(postData);
       const data = await postService.updatePostId(id, postData);
 
       navigate(`/post/${id}`);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setErrors(err.response.data);
       err.response.data.map((item) => toast.warn(item.msg));
     }
@@ -44,13 +43,11 @@ const EditPost = () => {
   if (!isAuth) {
     return <Navigate to={"/"} />;
   }
-  console.log("edit from ing", img);
+
   useEffect(() => {
     const getDataPost = async () => {
       const data = await postService.getPostId(id);
-      console.log(data);
       const { title, tags, text, imageUrl } = data;
-      console.log(imageUrl);
       setValue({ title, tags, text });
       setImg(imageUrl);
     };

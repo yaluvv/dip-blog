@@ -16,7 +16,7 @@ const CreatePost = () => {
     tags: "",
     text: "",
   });
-  console.log(img);
+
   const navigate = useNavigate();
   const handleChangeFields = (e) => {
     setValue((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -31,7 +31,7 @@ const CreatePost = () => {
       const { data } = await httpService.post("/posts", postData);
       navigate(`/post/${data._id}`);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setErrors(err.response.data);
       err.response.data.map((item) => toast.warn(item.msg));
     }

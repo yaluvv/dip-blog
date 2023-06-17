@@ -18,7 +18,6 @@ const SignUpForm = ({ setFormType }) => {
     mode: "onChange",
   });
 
-  console.log(getValues("avatarUrl"));
   const dispatch = useDispatch();
   const { isAuth } = useAuth();
 
@@ -37,7 +36,7 @@ const SignUpForm = ({ setFormType }) => {
   };
   const onSubmit = async (data) => {
     const avatarUrl = data.avatarUrl[0].name;
-    console.log({ ...data, avatarUrl, role: "User" });
+    // console.log({ ...data, avatarUrl, role: "User" });
     const { payload } = await dispatch(
       authSignup({ ...data, avatarUrl: getValues("avatarUrl"), role: "User" })
     );

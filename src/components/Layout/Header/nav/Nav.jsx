@@ -1,26 +1,33 @@
-import { Link } from "react-router-dom";
-
 import styles from "./Nav.module.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { changeValue, sortsValues } from "../../../../redux/slices/sortSlice";
 
 const navItems = [
   {
     title: "Popular",
-    link: "/popular",
+    value: sortsValues.POPULAR,
   },
   {
     title: "New",
-    link: "/new",
-    class: "newBtn",
+    value: sortsValues.NEW,
   },
 ];
 
 const Nav = () => {
+  const { value: sortValue } = useSelector((state) => state.sort);
+  const dispatch = useDispatch();
+
   return (
     <nav className={styles.nav}>
       <ul className={styles.navList}>
         {navItems.map((item) => (
-          <li className={item.class ? styles[item.class] : ""} key={item.title}>
-            <Link to={item.link}>{item.title}</Link>
+          <li
+            className={sortValue === item.value ? styles.active : ""}
+            key={item.title}
+          >
+            <button onClick={() => dispatch(changeValue(item.value))}>
+              {item.title}
+            </button>
           </li>
         ))}
       </ul>

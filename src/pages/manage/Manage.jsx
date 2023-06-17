@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import Post from "../../components/Post/Post";
 import styles from "./Manage.module.scss";
-import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
@@ -19,6 +18,8 @@ const Manage = () => {
   const handleChangeRow = () => {
     setIsRowPosts((prev) => !prev);
   };
+
+  console.log(userPosts);
 
   useEffect(() => {
     if (userLoading === "loaded") {
@@ -72,10 +73,9 @@ const Manage = () => {
               : styles.postList
           }
         >
-          {loading === "loaded" &&
+          {userPosts &&
             userPosts.map((post) => <Post key={post._id} {...post} />)}
         </div>
-        <LoadMoreButton className={styles.moreBtn} />
       </div>
     </section>
   );

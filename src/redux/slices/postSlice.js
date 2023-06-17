@@ -33,6 +33,7 @@ export const fetchUserPosts = createAsyncThunk('posts/fetchUserPosts', async (pa
 const initialState = {
     posts: {
         items: [],
+        countPosts: 0,
         loading: 'loading',
         errors: null,
         userPosts: []
@@ -56,8 +57,10 @@ export const postSlice = createSlice({
                 state.posts.loading = 'loading'
             })
             .addCase(fetchAllPosts.fulfilled, (state, action) => {
+                state.posts = action.payload
                 state.posts.loading = 'loaded'
-                state.posts.items = action.payload
+                state.posts.errors = null
+
             })
             .addCase(fetchAllPosts.rejected, (state, action) => {
                 state.posts.items = []

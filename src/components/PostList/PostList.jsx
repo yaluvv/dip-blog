@@ -1,15 +1,19 @@
 import LoadMoreButton from "../LoadMoreButton/LoadMoreButton";
 import Post from "../Post/Post";
 import styles from "./PostList.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPosts, fetchAllTags } from "../../redux/slices/postSlice";
 
 const PostList = () => {
   const [isRowPosts, setIsRowPosts] = useState(false);
   const dispatch = useDispatch();
-  const { items, loading, errors } = useSelector((state) => state.posts.posts);
+  const { items, loading, errors, countPosts } = useSelector(
+    (state) => state.posts.posts
+  );
   const { value: sortValue } = useSelector((state) => state.sort);
+  let limitPostsRef = useRef(4);
+  const loadMoreBtnRef = useRef();
 
   useEffect(() => {
     dispatch(fetchAllPosts({ sort: sortValue }));
@@ -21,6 +25,11 @@ const PostList = () => {
 
   const handleChange = () => {
     setIsRowPosts((prev) => !prev);
+  };
+
+  const handleChangeLimit = () => {
+    limitPostsRef.current += 2;
+    dispatch(fetchAllPosts({ sort: sortValue, limit: limitPostsRef.current }));
   };
 
   return (
@@ -38,13 +47,17 @@ const PostList = () => {
             }
           >
             {loading === "rejected" && <h1>{errors.message}</h1>}
-            {loading === "loading" ? (
-              <h1>LOADING!!!</h1>
-            ) : (
-              items.map((item) => <Post key={item._id} {...item} />)
-            )}
+            {loading === "loaded" &&
+              items.map((item) => <Post key={item._id} {...item} />)}
           </div>
-          <LoadMoreButton className={styles.moreBtn} />
+
+          {items.length !== countPosts && (
+            <LoadMoreButton
+              ref={loadMoreBtnRef}
+              onAddPosts={handleChangeLimit}
+              className={styles.moreBtn}
+            />
+          )}
         </div>
       </div>
     </section>

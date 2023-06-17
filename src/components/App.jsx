@@ -11,6 +11,7 @@ import { authMe } from "../redux/slices/authSlice";
 import CreatePost from "../pages/create-post/CreatePost";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import EditPost from "../pages/edit-post/EditPost";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/post/:id" element={<FullPost />} />
+        <Route path="/post/:id/edit" element={<EditPost />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/manage" element={<Manage />} />
         <Route path="/manage/profile" element={<Profile />} />

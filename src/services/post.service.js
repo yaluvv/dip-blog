@@ -37,6 +37,15 @@ export const postService = {
         }
 
     },
+    updatePostId: async (id, postData) => {
+        try {
+            const { data } = await httpService.patch(`/posts/${id}`, postData)
+            return data
+        } catch (err) {
+            console.warn(err);
+        }
+
+    },
     createPost: async (postData) => {
         try {
             const { data } = await httpService.post('/posts', postData)

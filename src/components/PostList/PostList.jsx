@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import LoadMoreButton from "../LoadMoreButton/LoadMoreButton";
 import Post from "../Post/Post";
 import styles from "./PostList.module.scss";
@@ -38,11 +37,7 @@ const PostList = () => {
             {loading === "loading" ? (
               <h1>LOADING!!!</h1>
             ) : (
-              items.map((item) => (
-                <Link key={item._id} to={`post/${item._id}`}>
-                  <Post {...item} />
-                </Link>
-              ))
+              items.map((item) => <Post key={item._id} {...item} />)
             )}
           </div>
           <LoadMoreButton className={styles.moreBtn} />

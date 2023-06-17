@@ -21,7 +21,7 @@ const Profile = () => {
           <h2 className={`heading ${styles.title}`}>Your profile info</h2>
           <div className={styles.profileImg}>
             <img
-              src={`http://localhost:4444/uploads/${user.avatarUrl}`}
+              src={`http://localhost:4444${user.avatarUrl}`}
               alt="avatar image"
             />
           </div>

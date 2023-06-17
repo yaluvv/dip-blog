@@ -14,8 +14,7 @@ const Manage = () => {
   const { items, loading, userPosts } = useSelector(
     (state) => state.posts.posts
   );
-  const { isAuth, user, loading: userLoading } = useAuth();
-  const isAdmin = user?.role === "Admin";
+  const { isAuth, isAdmin, user, loading: userLoading } = useAuth();
 
   const handleChangeRow = () => {
     setIsRowPosts((prev) => !prev);
@@ -59,9 +58,7 @@ const Manage = () => {
               }
             >
               {items.map((post) => (
-                <Link key={post._id} to={`/post/${post._id}`}>
-                  <Post {...post} />
-                </Link>
+                <Post key={post._id} {...post} />
               ))}
             </div>
           </>
@@ -76,11 +73,7 @@ const Manage = () => {
           }
         >
           {loading === "loaded" &&
-            userPosts.map((post) => (
-              <Link key={post._id} to={`/post/${post._id}`}>
-                <Post {...post} />
-              </Link>
-            ))}
+            userPosts.map((post) => <Post key={post._id} {...post} />)}
         </div>
         <LoadMoreButton className={styles.moreBtn} />
       </div>

@@ -3,20 +3,23 @@ import styles from "./FullPost.module.scss";
 import { useEffect, useState } from "react";
 import { postService } from "../../services/post.service";
 import ReactMarkdown from "react-markdown";
+import EditIcon from "@mui/icons-material/Edit";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 const FullPost = () => {
   const { id } = useParams();
   const [postData, setPostData] = useState({});
+
+  const { user, isAdmin } = useAuth();
+
+  const isImg = postData.imageUrl;
   console.log(postData);
-  const isImg = Object.values(postData).length
-    ? postData.imageUrl.length
-    : null;
 
   useEffect(() => {
     const getPostById = async () => {
       const data = await postService.getPostId(id);
       setPostData(data);
-      console.log(data);
     };
     getPostById();
   }, []);
@@ -36,6 +39,19 @@ const FullPost = () => {
             />
           ) : (
             <div className={styles.fullPostItemNotImg}></div>
+          )}
+          {isAdmin && (
+            <Link to={`/post/${id}/edit`} className={styles.editBtn}>
+              <EditIcon />
+              Edit
+            </Link>
+          )}
+
+          {postData.user._id === user._id && (
+            <Link to={`/post/${id}/edit`} className={styles.editBtn}>
+              <EditIcon />
+              Edit
+            </Link>
           )}
 
           <span className={styles.fullPostItemTitle}>{postData.title}</span>

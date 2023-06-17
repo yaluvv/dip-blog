@@ -14,7 +14,6 @@ const FullPost = () => {
   const { user, isAdmin } = useAuth();
 
   const isImg = postData.imageUrl;
-  console.log(postData);
 
   useEffect(() => {
     const getPostById = async () => {

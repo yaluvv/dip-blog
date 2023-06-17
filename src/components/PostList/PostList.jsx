@@ -9,9 +9,13 @@ const PostList = () => {
   const [isRowPosts, setIsRowPosts] = useState(false);
   const dispatch = useDispatch();
   const { items, loading, errors } = useSelector((state) => state.posts.posts);
+  const { value: sortValue } = useSelector((state) => state.sort);
 
   useEffect(() => {
-    dispatch(fetchAllPosts());
+    dispatch(fetchAllPosts({ sort: sortValue }));
+  }, [sortValue]);
+
+  useEffect(() => {
     dispatch(fetchAllTags());
   }, []);
 

@@ -1,10 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { postService } from "../../services/post.service";
 
-export const fetchAllPosts = createAsyncThunk('posts/fetchAllPosts', async (_, { rejectWithValue }) => {
-
+export const fetchAllPosts = createAsyncThunk('posts/fetchAllPosts', async (params, { rejectWithValue }) => {
     try {
-        const data = await postService.getAllPosts()
+        const data = await postService.getAllPosts(params)
         if (data.name === 'AxiosError') {
             return rejectWithValue(data)
         }

@@ -17,7 +17,6 @@ const LoginForm = ({ setFormType }) => {
 
   const dispatch = useDispatch();
   const { isAuth } = useAuth();
-  console.log(isAuth);
 
   const onSubmit = async (data) => {
     const { payload } = await dispatch(authLogin(data));

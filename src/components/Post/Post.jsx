@@ -5,7 +5,6 @@ import { useAuth } from "../../hooks/useAuth";
 
 const Post = ({ title, imageUrl, user, _id, tags, viewsCount }) => {
   const { user: userData, isAdmin } = useAuth();
-  console.log(imageUrl);
 
   return (
     <article className={styles.post}>
@@ -24,7 +23,7 @@ const Post = ({ title, imageUrl, user, _id, tags, viewsCount }) => {
           Edit
         </Link>
       )}
-      {user._id === userData._id && (
+      {user?._id === userData?._id && (
         <Link to={`/post/${_id}/edit`} className={styles.editBtn}>
           <EditIcon />
           Edit

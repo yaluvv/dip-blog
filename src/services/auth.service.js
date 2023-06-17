@@ -6,7 +6,7 @@ export const authService = {
             const { data } = await httpService.post('/auth/login', payload)
             return data
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     },
     signup: async (payload) => {
@@ -14,7 +14,7 @@ export const authService = {
             const { data } = await httpService.post('/auth/register', payload)
             return data
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     },
     me: async () => {

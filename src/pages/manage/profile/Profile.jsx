@@ -31,7 +31,7 @@ const Profile = () => {
             <>
               <div className={styles.profileImg}>
                 <img
-                  src={`http://localhost:4444${user.avatarUrl}`}
+                  src={`${import.meta.env.VITE_API_URL}${user.avatarUrl}`}
                   alt="avatar image"
                 />
               </div>

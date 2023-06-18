@@ -10,7 +10,6 @@ import { postService } from "../../services/post.service";
 
 const EditPost = () => {
   const [img, setImg] = useState(null);
-  const [errors, setErrors] = useState([]);
   const { isAuth } = useAuth();
   const [value, setValue] = useState({
     title: "",
@@ -32,10 +31,13 @@ const EditPost = () => {
       const postData = { ...value, imageUrl: img ? img : "" };
       const data = await postService.updatePostId(id, postData);
 
-      navigate(`/post/${id}`);
+      if (data.name === "AxiosError") {
+        data.response.data.map((item) => toast.warn(item.msg));
+      } else {
+        navigate(`/post/${id}`);
+      }
     } catch (err) {
       console.error(err);
-      setErrors(err.response.data);
       err.response.data.map((item) => toast.warn(item.msg));
     }
   };

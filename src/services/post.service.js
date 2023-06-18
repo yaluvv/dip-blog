@@ -1,9 +1,18 @@
 import { httpService } from "./http.service";
 
 export const postService = {
-    getAllPosts: async (params) => {
+    getAllPosts: async () => {
         try {
-            const { data } = await httpService.get('/posts', {
+            const { data } = await httpService.get('/posts')
+            return data
+        } catch (err) {
+            console.warn(err);
+            return { name: err.name, code: err.code, message: err.message }
+        }
+    },
+    loadMorePosts: async (params) => {
+        try {
+            const { data } = await httpService.get('/load-more', {
                 params,
             })
             return data
@@ -43,7 +52,8 @@ export const postService = {
             const { data } = await httpService.patch(`/posts/${id}`, postData)
             return data
         } catch (err) {
-            console.warn(err);
+            console.error(err);
+            return err
         }
 
     },

@@ -11,7 +11,7 @@ const Post = ({ title, imageUrl, user, _id, tags, viewsCount }) => {
       <Link to={`/post/${_id}`}>
         <div className={styles.postImg}>
           {imageUrl ? (
-            <img src={`http://localhost:4444${imageUrl}`} alt="" />
+            <img src={`${import.meta.env.VITE_API_URL}${imageUrl}`} alt="" />
           ) : (
             <div className={styles.postNotImg}></div>
           )}

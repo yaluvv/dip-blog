@@ -6,6 +6,7 @@ import { authSignup } from "../../../redux/slices/authSlice";
 import { useAuth } from "../../../hooks/useAuth";
 import { Navigate } from "react-router-dom";
 import { httpService } from "../../../services/http.service";
+import { toast } from "react-toastify";
 
 const SignUpForm = ({ setFormType }) => {
   const {
@@ -23,13 +24,22 @@ const SignUpForm = ({ setFormType }) => {
 
   const handleChangeImage = async () => {
     try {
-      const formData = new FormData();
-      const imageSrc = getValues("avatarUrl")[0];
-      formData.append("image", imageSrc);
-      const { data } = await httpService.post("/avatar", formData);
-      setValue("avatarUrl", data.url, {
-        shouldValidate: true,
-      });
+      const imgTypes = ["png", "jpg", "jpeg"];
+      const isHaveImgType = imgTypes.find(
+        (item) => item === getValues("avatarUrl")[0].name.split(".")[1]
+      );
+
+      if (isHaveImgType) {
+        const formData = new FormData();
+        const imageSrc = getValues("avatarUrl")[0];
+        formData.append("image", imageSrc);
+        const { data } = await httpService.post("/avatar", formData);
+        setValue("avatarUrl", data.url, {
+          shouldValidate: true,
+        });
+      } else {
+        toast.warn("Формат изображения должен быть в: PNG, JPG, JPEG");
+      }
     } catch (err) {
       console.warn(err);
     }
@@ -93,7 +103,9 @@ const SignUpForm = ({ setFormType }) => {
       >
         <div>
           {getValues("avatarUrl") && (
-            <img src={`http://localhost:4444${getValues("avatarUrl")}`} />
+            <img
+              src={`${import.meta.env.VITE_API_URL}${getValues("avatarUrl")}`}
+            />
           )}
         </div>
 

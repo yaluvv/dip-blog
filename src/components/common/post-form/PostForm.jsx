@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 import InputField from "../auth-form/InputField";
 import { httpService } from "../../../services/http.service";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const PostForm = ({
   value,
   onSubmit,
@@ -20,10 +21,19 @@ const PostForm = ({
 
   const handleUploadImage = async (event) => {
     try {
-      const formData = new FormData();
-      formData.append("image", event.target.files[0]);
-      const { data } = await httpService.post("/upload", formData);
-      setImg(data.url);
+      const imgTypes = ["png", "jpg", "jpeg"];
+      const isHaveImgType = imgTypes.find(
+        (item) => item === event.target.files[0].name.split(".")[1]
+      );
+
+      if (isHaveImgType) {
+        const formData = new FormData();
+        formData.append("image", event.target.files[0]);
+        const { data } = await httpService.post("/upload", formData);
+        setImg(data.url);
+      } else {
+        toast.warn("Формат изображения должен быть в: PNG, JPG, JPEG");
+      }
     } catch (err) {
       console.error(err);
     }
@@ -42,7 +52,7 @@ const PostForm = ({
         {img && (
           <img
             className={styles.postFormUploadImg}
-            src={`http://localhost:4444${img}`}
+            src={`${precess.env.REACT_DB_SERVER}${img}`}
           />
         )}
         <div className={styles.upButtons}>

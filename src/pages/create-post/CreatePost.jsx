@@ -9,7 +9,6 @@ import PostForm from "../../components/common/post-form/PostForm";
 
 const CreatePost = () => {
   const [img, setImg] = useState(null);
-  const [errors, setErrors] = useState([]);
   const { isAuth } = useAuth();
   const [value, setValue] = useState({
     title: "",
@@ -32,7 +31,6 @@ const CreatePost = () => {
       navigate(`/post/${data._id}`);
     } catch (err) {
       console.error(err);
-      setErrors(err.response.data);
       err.response.data.map((item) => toast.warn(item.msg));
     }
   };

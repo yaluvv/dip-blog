@@ -33,7 +33,7 @@ const FullPost = () => {
         <div className={styles.fullPostItem}>
           {isImg ? (
             <img
-              src={`http://localhost:4444${postData.imageUrl}`}
+              src={`${import.meta.env.VITE_API_URL}${postData.imageUrl}`}
               alt="image blog"
             />
           ) : (
@@ -46,7 +46,7 @@ const FullPost = () => {
             </Link>
           )}
 
-          {postData.user._id === user._id && (
+          {postData.user._id === user?._id && (
             <Link to={`/post/${id}/edit`} className={styles.editBtn}>
               <EditIcon />
               Edit

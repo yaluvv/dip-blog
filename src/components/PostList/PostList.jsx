@@ -3,17 +3,23 @@ import Post from "../Post/Post";
 import styles from "./PostList.module.scss";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllPosts, fetchAllTags } from "../../redux/slices/postSlice";
+import {
+  fetchAllPosts,
+  fetchAllTags,
+  loadMorePosts,
+} from "../../redux/slices/postSlice";
 
 const PostList = () => {
   const [isRowPosts, setIsRowPosts] = useState(false);
   const dispatch = useDispatch();
-  const { items, loading, errors, countPosts } = useSelector(
+  const { items, loading, errors, countPosts, moreLoading } = useSelector(
     (state) => state.posts.posts
   );
   const { value: sortValue } = useSelector((state) => state.sort);
   let limitPostsRef = useRef(4);
+  let skipPostsRef = useRef(4);
   const loadMoreBtnRef = useRef();
+  let isFirst = useRef(true);
 
   useEffect(() => {
     dispatch(fetchAllPosts({ sort: sortValue }));
@@ -28,8 +34,20 @@ const PostList = () => {
   };
 
   const handleChangeLimit = () => {
-    limitPostsRef.current += 2;
-    dispatch(fetchAllPosts({ sort: sortValue, limit: limitPostsRef.current }));
+    if ((countPosts % items.length) + skipPostsRef.current === 0) {
+      return;
+    } else {
+      if (!isFirst.current) {
+        skipPostsRef.current += 4;
+      }
+      isFirst.current = false;
+      dispatch(
+        loadMorePosts({
+          skip: skipPostsRef.current,
+          limit: limitPostsRef.current,
+        })
+      );
+    }
   };
 
   return (
@@ -50,7 +68,7 @@ const PostList = () => {
             {loading === "loaded" &&
               items.map((item) => <Post key={item._id} {...item} />)}
           </div>
-
+          {moreLoading === "loading" && <h1>loading more posts</h1>}
           {items.length !== countPosts && (
             <LoadMoreButton
               ref={loadMoreBtnRef}

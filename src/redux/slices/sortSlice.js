@@ -7,8 +7,6 @@ export const sortsValues = {
 
 const initialState = {
     value: sortsValues.NEW,
-    loading: 'loading',
-    errors: null
 }
 
 export const sortSlice = createSlice({
@@ -23,3 +21,4 @@ export const sortSlice = createSlice({
 })
 export const { changeValue } = sortSlice.actions
 export default sortSlice.reducer;
+

@@ -52,7 +52,7 @@ const PostForm = ({
         {img && (
           <img
             className={styles.postFormUploadImg}
-            src={`${precess.env.REACT_DB_SERVER}${img}`}
+            src={`${process.env.REACT_DB_SERVER}${img}`}
           />
         )}
         <div className={styles.upButtons}>

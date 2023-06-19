@@ -45,14 +45,35 @@ const SignUpForm = ({ setFormType }) => {
     }
   };
   const onSubmit = async (data) => {
-    const avatarUrl = data.avatarUrl[0].name;
-    // console.log({ ...data, avatarUrl, role: "User" });
-    const { payload } = await dispatch(
-      authSignup({ ...data, avatarUrl: getValues("avatarUrl"), role: "User" })
-    );
+    try {
+      // const avatarUrl = data.avatarUrl[0].name;
 
-    if ("token" in payload) {
-      window.localStorage.setItem("token", payload.token);
+      // console.log({ ...data, avatarUrl, role: "User" });
+      if (!Boolean(getValues("avatarUrl"))) {
+        const { email, fullName, password } = data;
+
+        const { payload } = await dispatch(
+          authSignup({ email, fullName, password, role: "User" })
+        );
+
+        if ("token" in payload) {
+          window.localStorage.setItem("token", payload.token);
+        }
+      } else {
+        const { payload } = await dispatch(
+          authSignup({
+            ...data,
+            avatarUrl: getValues("avatarUrl"),
+            role: "User",
+          })
+        );
+
+        if ("token" in payload) {
+          window.localStorage.setItem("token", payload.token);
+        }
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

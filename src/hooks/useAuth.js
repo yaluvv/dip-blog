@@ -2,8 +2,11 @@ import { useSelector } from "react-redux";
 
 export const useAuth = () => {
     const { user, loading } = useSelector(state => state.auth)
-    const isAuth = Boolean(user)
-    const isAdmin = isAuth && user.role === 'Admin'
+
+    const isAuth = Boolean(localStorage.getItem('token')) || Boolean(user)
+    const isAdmin = user?.role === 'Admin'
+
+    console.log(Boolean(localStorage.getItem('token')) || Boolean(user));
 
 
     return {

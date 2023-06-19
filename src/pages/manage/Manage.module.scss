@@ -12,6 +12,7 @@
     .postList {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
         gap: 50px;
 
         &Column {
@@ -27,5 +28,9 @@
         border-radius: 5px;
         padding: 6px;
         margin-left: 20px;
+    }
+    .skeletonItem {
+        width: 100%;
+        max-width: 972px;
     }
 }

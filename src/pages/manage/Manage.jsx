@@ -6,11 +6,12 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { fetchAllPosts, fetchUserPosts } from "../../redux/slices/postSlice";
 import { Navigate } from "react-router-dom";
+import { Skeleton } from "@mui/material";
 
 const Manage = () => {
-  const [isRowPosts, setIsRowPosts] = useState(false);
+  const [isRowPosts, setIsRowPosts] = useState(true);
   const dispatch = useDispatch();
-  const { items, loading, userPosts } = useSelector(
+  const { items, loading, userPosts, countPosts } = useSelector(
     (state) => state.posts.posts
   );
   const { isAuth, isAdmin, user, loading: userLoading } = useAuth();
@@ -19,12 +20,10 @@ const Manage = () => {
     setIsRowPosts((prev) => !prev);
   };
 
-  console.log(userPosts);
-
   useEffect(() => {
     if (userLoading === "loaded") {
       if (isAdmin) {
-        dispatch(fetchAllPosts());
+        dispatch(fetchAllPosts({ limit: countPosts }));
       } else {
         dispatch(fetchUserPosts(user._id));
       }
@@ -48,6 +47,36 @@ const Manage = () => {
             ? "Отобразить в одну колонку"
             : "Отобразить в две колонки"}
         </button>
+
+        {(loading === "loading" || userLoading === "loading") && (
+          <div
+            className={
+              isRowPosts
+                ? `${styles.postList} ${styles.postListColumn}`
+                : styles.postList
+            }
+          >
+            {[...Array(5)].map((_, index) => {
+              return (
+                <div className={styles.skeletonItem} key={index}>
+                  <Skeleton
+                    variant="rectangular"
+                    width={"100%"}
+                    height={300}
+                    sx={{ marginBottom: 1, borderRadius: "10px" }}
+                  />
+                  <Skeleton
+                    width={200}
+                    height={42}
+                    sx={{ marginBottom: "4px" }}
+                  />
+                  <Skeleton width={200} height={60} />
+                </div>
+              );
+            })}
+          </div>
+        )}
+
         {isAdmin && (
           <>
             <h2 className={`heading ${styles.title}`}>Все посты в блоге</h2>
@@ -73,6 +102,8 @@ const Manage = () => {
               : styles.postList
           }
         >
+          {isAdmin && !items?.length && <h1>No posts yet</h1>}
+          {!isAdmin && !userPosts?.length && <h1>No posts yet</h1>}
           {userPosts &&
             userPosts.map((post) => <Post key={post._id} {...post} />)}
         </div>

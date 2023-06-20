@@ -35,9 +35,32 @@ export const loadMorePosts = createAsyncThunk('posts/loadMorePosts', async (para
         console.error(err);
     }
 })
-export const fetchUserPosts = createAsyncThunk('posts/fetchUserPosts', async (params) => {
-    const data = await postService.getUserPosts(params)
-    return data
+export const fetchUserPosts = createAsyncThunk('posts/fetchUserPosts', async (params, { rejectWithValue }) => {
+    try {
+        const data = await postService.getUserPosts(params)
+
+        if (data.name === 'AxiosError') {
+            console.log(data);
+            return rejectWithValue(data)
+        }
+        return data
+    } catch (err) {
+        console.error(err);
+    }
+})
+export const deletePost = createAsyncThunk('posts/deletePost', async (params, { rejectWithValue }) => {
+    try {
+        const data = await postService.deletePostId(params)
+
+        if (data.name === 'AxiosError') {
+            console.log(data, 'pizda');
+            return rejectWithValue(data)
+        }
+
+        return data
+    } catch (err) {
+        console.log(err, 'SUUUKA');
+    }
 })
 
 
@@ -113,6 +136,18 @@ export const postSlice = createSlice({
             })
             .addCase(loadMorePosts.rejected, (state, action) => {
                 state.posts.moreLoading = 'rejected'
+                state.posts.errors = action.payload
+            })
+            .addCase(deletePost.pending, (state) => {
+                state.posts.loading = 'loading'
+            })
+            .addCase(deletePost.fulfilled, (state, action) => {
+                state.posts.items = state.posts.items.filter(item => item._id !== action.payload.postId)
+                state.posts.loading = 'loaded'
+                state.posts.errors = null
+            })
+            .addCase(deletePost.rejected, (state, action) => {
+                state.posts.loading = 'rejected'
                 state.posts.errors = action.payload
             })
     },

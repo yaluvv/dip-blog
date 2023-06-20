@@ -6,9 +6,6 @@ export const useAuth = () => {
     const isAuth = Boolean(localStorage.getItem('token')) || Boolean(user)
     const isAdmin = user?.role === 'Admin'
 
-    console.log(Boolean(localStorage.getItem('token')) || Boolean(user));
-
-
     return {
         isAuth,
         loading,

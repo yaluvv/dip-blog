@@ -26,9 +26,18 @@ const CreatePost = () => {
 
   const handleCreatePost = async () => {
     try {
-      const postData = img ? { ...value, imageUrl: img } : { ...value };
-      const { data } = await httpService.post("/posts", postData);
-      navigate(`/post/${data._id}`);
+      const regExp = /^([0-9a-zа-я][^\s]+)([,][^\s][0-9a-zа-я]+)*$/i;
+
+      if (value.tags.search(regExp) === -1) {
+        toast.warn("Укажите список тегов через запятую без пробелов");
+      } else {
+        const tags = value.tags.split(",");
+        const postData = img
+          ? { ...value, imageUrl: img, tags }
+          : { ...value, tags };
+        const { data } = await httpService.post("/posts", postData);
+        navigate(`/post/${data._id}`);
+      }
     } catch (err) {
       console.error(err);
       err.response.data.map((item) => toast.warn(item.msg));

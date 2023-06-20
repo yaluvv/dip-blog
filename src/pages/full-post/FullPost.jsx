@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import ActionButtons from "../../components/Post/ActionButtons";
 
 const FullPost = () => {
   const { id } = useParams();
@@ -39,19 +40,9 @@ const FullPost = () => {
           ) : (
             <div className={styles.fullPostItemNotImg}></div>
           )}
-          {isAdmin && (
-            <Link to={`/post/${id}/edit`} className={styles.editBtn}>
-              <EditIcon />
-              Edit
-            </Link>
-          )}
+          {isAdmin && <ActionButtons id={id} />}
 
-          {postData.user._id === user?._id && (
-            <Link to={`/post/${id}/edit`} className={styles.editBtn}>
-              <EditIcon />
-              Edit
-            </Link>
-          )}
+          {postData.user._id === user?._id && <ActionButtons id={id} />}
 
           <span className={styles.fullPostItemTitle}>{postData.title}</span>
           <ReactMarkdown children={postData.text} />
@@ -59,7 +50,7 @@ const FullPost = () => {
             <span>by</span>
             <p>{postData.user.fullName}</p>
             <span>in</span>
-            <p>{postData.tags.join("")}</p>
+            <p>{postData.tags.join(", ")}</p>
             <span>{postData.viewsCount}</span>
           </div>
         </div>

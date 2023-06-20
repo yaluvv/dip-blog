@@ -14,5 +14,6 @@ http.interceptors.request.use((config) => {
 export const httpService = {
     get: http.get,
     post: http.post,
-    patch: http.patch
+    patch: http.patch,
+    delete: http.delete
 }

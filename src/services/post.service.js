@@ -28,7 +28,7 @@ export const postService = {
             const { data } = await httpService.get('/me/posts', params)
             return data
         } catch (err) {
-            console.warn(err);
+            console.error(err);
         }
     },
     getAllTags: async () => {
@@ -59,12 +59,22 @@ export const postService = {
         }
 
     },
+    deletePostId: async (id, postData) => {
+        try {
+            const { data } = await httpService.delete(`/posts/${id}`, postData)
+            return data
+        } catch (err) {
+            console.error(err);
+            return { name: err.name, code: err.code, message: err.response.data.message }
+        }
+
+    },
     createPost: async (postData) => {
         try {
             const { data } = await httpService.post('/posts', postData)
             return data
         } catch (err) {
-            console.warn(err);
+            console.error(err);
             return { name: err.name, code: err.code, message: err.message }
         }
     },

@@ -8,7 +8,7 @@ export const postService = {
             })
             return data
         } catch (err) {
-            console.warn(err);
+            console.error(err);
             return { name: err.name, code: err.code, message: err.message }
         }
     },
@@ -19,7 +19,7 @@ export const postService = {
             })
             return data
         } catch (err) {
-            console.warn(err);
+            console.error(err);
             return { name: err.name, code: err.code, message: err.message }
         }
     },
@@ -45,7 +45,7 @@ export const postService = {
             const { data } = await httpService.get(`/posts/${id}`)
             return data
         } catch (err) {
-            console.warn(err);
+            console.error(err);
         }
 
     },

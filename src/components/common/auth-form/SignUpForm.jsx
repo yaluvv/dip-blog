@@ -46,9 +46,6 @@ const SignUpForm = ({ setFormType }) => {
   };
   const onSubmit = async (data) => {
     try {
-      // const avatarUrl = data.avatarUrl[0].name;
-
-      // console.log({ ...data, avatarUrl, role: "User" });
       if (!Boolean(getValues("avatarUrl"))) {
         const { email, fullName, password } = data;
 

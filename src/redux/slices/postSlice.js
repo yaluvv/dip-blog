@@ -40,7 +40,6 @@ export const fetchUserPosts = createAsyncThunk('posts/fetchUserPosts', async (pa
         const data = await postService.getUserPosts(params)
 
         if (data.name === 'AxiosError') {
-            console.log(data);
             return rejectWithValue(data)
         }
         return data
@@ -53,13 +52,12 @@ export const deletePost = createAsyncThunk('posts/deletePost', async (params, { 
         const data = await postService.deletePostId(params)
 
         if (data.name === 'AxiosError') {
-            console.log(data, 'pizda');
             return rejectWithValue(data)
         }
 
         return data
     } catch (err) {
-        console.log(err, 'SUUUKA');
+        console.error(err);
     }
 })
 

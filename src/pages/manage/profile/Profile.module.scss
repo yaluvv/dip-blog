@@ -45,5 +45,10 @@
             background-color: #ff5480;
             padding: 10px;
         }
+
+        @media screen and (max-width: 610px) {
+            flex-direction: column;
+            row-gap: 20px;
+        }
     }
 }

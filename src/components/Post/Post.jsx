@@ -1,5 +1,5 @@
 import styles from "./Post.module.scss";
-
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import ActionButtons from "./ActionButtons";
@@ -29,7 +29,10 @@ const Post = ({ title, imageUrl, user, _id, tags, viewsCount }) => {
           <p>{user.fullName}</p>
           <span>in</span>
           <p>{tags.join(", ")}</p>
-          <span>{viewsCount}</span>
+          <div className={styles.postViews}>
+            <VisibilityIcon />
+            <span>{viewsCount}</span>
+          </div>
         </div>
         <h3>{title}</h3>
       </div>

@@ -93,4 +93,8 @@ main {
 }
 .heading {
     font-size: 42px;
+
+    @media screen and (max-width: 556px) {
+        font-size: 34px;
+    }
 }

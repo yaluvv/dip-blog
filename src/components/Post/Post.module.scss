@@ -23,6 +23,7 @@
 
     &Info {
         display: flex;
+        align-items: center;
         column-gap: 10px;
         margin-bottom: 6px;
         > span {
@@ -60,5 +61,11 @@
             object-position: center;
             height: 300px;
         }
+    }
+    &Views {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-left: auto;
     }
 }

@@ -1,70 +1,112 @@
 import { Link } from "react-router-dom";
 import Post from "../../components/Post/Post";
 import styles from "./Manage.module.scss";
-import LoadMoreButton from "../../components/LoadMoreButton/LoadMoreButton";
-import PostList from "../../components/PostList/PostList";
-
-const arrPosts = [
-  {
-    id: 1,
-    title: "Test1",
-    description: "Test1 desc",
-    author: "Alex Puzikov",
-    category: "Test",
-  },
-  {
-    id: 2,
-    title: "Test2",
-    description: "Test2 desc",
-    author: "Alex Puzikov",
-    category: "Test",
-  },
-  {
-    id: 3,
-    title: "Test3",
-    description: "Test3 desc",
-    author: "Alex Puzikov",
-    category: "Test",
-  },
-  {
-    id: 4,
-    title: "Test4",
-    description: "Test4 desc",
-    author: "Alex Puzikov",
-    category: "Test",
-  },
-  {
-    id: 5,
-    title: "Test5",
-    description: "Test5 desc",
-    author: "Alex Puzikov",
-    category: "Test",
-  },
-];
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { fetchAllPosts, fetchUserPosts } from "../../redux/slices/postSlice";
+import { Navigate } from "react-router-dom";
+import { Skeleton } from "@mui/material";
 
 const Manage = () => {
-  const userIsAdmin = true;
+  const [isRowPosts, setIsRowPosts] = useState(true);
+  const dispatch = useDispatch();
+  const { items, loading, userPosts, countPosts } = useSelector(
+    (state) => state.posts.posts
+  );
+  const { isAuth, isAdmin, user, loading: userLoading } = useAuth();
+
+  const handleChangeRow = () => {
+    setIsRowPosts((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (userLoading === "loaded") {
+      if (isAdmin) {
+        dispatch(fetchAllPosts({ limit: countPosts }));
+      } else {
+        dispatch(fetchUserPosts(user._id));
+      }
+    }
+  }, [userLoading]);
+
+  if (!isAuth) {
+    return <Navigate to={"/"} />;
+  }
   return (
     <section className={styles.manage}>
       <div className="container">
-        <button className={`btn btn--gray ${styles.btnPost}`}>
+        <Link to={"/create-post"} className={`btn btn--gray ${styles.btnPost}`}>
           Написать статью
+        </Link>
+        <button
+          onClick={handleChangeRow}
+          className={"btn" + " " + styles.changePosBtn}
+        >
+          {!isRowPosts
+            ? "Отобразить в одну колонку"
+            : "Отобразить в две колонки"}
         </button>
-        {userIsAdmin && (
-          <h2 className={`heading ${styles.title}`}>Все посты в блоге</h2>
+
+        {(loading === "loading" || userLoading === "loading") && (
+          <div
+            className={
+              isRowPosts
+                ? `${styles.postList} ${styles.postListColumn}`
+                : styles.postList
+            }
+          >
+            {[...Array(5)].map((_, index) => {
+              return (
+                <div className={styles.skeletonItem} key={index}>
+                  <Skeleton
+                    variant="rectangular"
+                    width={"100%"}
+                    height={300}
+                    sx={{ marginBottom: 1, borderRadius: "10px" }}
+                  />
+                  <Skeleton
+                    width={200}
+                    height={42}
+                    sx={{ marginBottom: "4px" }}
+                  />
+                  <Skeleton width={200} height={60} />
+                </div>
+              );
+            })}
+          </div>
         )}
 
-        {!userIsAdmin && (
-          <h2 className={`heading ${styles.title}`}>Мои посты</h2>
+        {isAdmin && (
+          <>
+            <h2 className={`heading ${styles.title}`}>Все посты в блоге</h2>
+            <div
+              className={
+                isRowPosts
+                  ? `${styles.postList} ${styles.postListColumn}`
+                  : styles.postList
+              }
+            >
+              {items.map((post) => (
+                <Post key={post._id} {...post} />
+              ))}
+            </div>
+          </>
         )}
-        <div className={styles.postList}>
-          {arrPosts.map((post) => (
-            <Link key={post.id} to={`/post/${post.id}`}>
-              <Post {...post} />
-            </Link>
-          ))}
+
+        {!isAdmin && <h2 className={`heading ${styles.title}`}>Мои посты</h2>}
+        <div
+          className={
+            isRowPosts
+              ? `${styles.postList} ${styles.postListColumn}`
+              : styles.postList
+          }
+        >
+          {isAdmin && !items?.length && <h1>No posts yet</h1>}
+          {!isAdmin && !userPosts?.length && <h1>No posts yet</h1>}
+          {userPosts &&
+            userPosts.map((post) => <Post key={post._id} {...post} />)}
         </div>
-        <LoadMoreButton className={styles.moreBtn} />
       </div>
     </section>
   );

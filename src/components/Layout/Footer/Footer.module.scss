@@ -5,10 +5,19 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        @media screen and (max-width: 556px) {
+            flex-direction: column;
+            row-gap: 20px;
+        }
     }
 
     &Social {
         margin-left: 100px;
+
+        @media screen and (max-width: 556px) {
+            margin-left: 0;
+        }
         &List {
             display: flex;
             align-items: center;
@@ -28,5 +37,11 @@
         line-height: 19px;
         text-align: right;
         color: #9b9b9b;
+
+        a {
+            margin-left: 10px;
+            color: #ff5480;
+            font-weight: 700;
+        }
     }
 }

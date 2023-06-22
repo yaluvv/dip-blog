@@ -2,7 +2,7 @@
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
-    max-width: 400px;
+    max-width: 450px;
     border-radius: 10px;
     form {
         display: flex;
@@ -58,6 +58,39 @@
     background-color: rgba($color: #e3e3e3, $alpha: 0.2);
     border: 1px solid gray;
     outline: none;
+
+    &[type="file"] {
+        visibility: hidden;
+        position: absolute;
+        left: -3500px;
+
+        + div {
+            margin: 0 auto;
+            display: block;
+            width: 100%;
+            max-width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: rgb(218, 218, 218);
+
+            img {
+                border-radius: 50%;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            + p {
+                margin: 20px auto 0;
+                border-radius: 5px;
+                padding: 5px;
+                max-width: 200px;
+                color: white;
+                text-align: center;
+                cursor: pointer;
+                background-color: #616161;
+            }
+        }
+    }
 }
 
 .errorText {

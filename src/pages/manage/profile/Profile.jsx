@@ -1,40 +1,51 @@
-import { useState } from "react";
 import styles from "./Profile.module.scss";
-import ProfileEditForm from "./ProfileEditForm";
-
-const userInfo = { email: "test@mail.ru", createdAt: "21.05.23", posts: 10 };
+import { useAuth } from "../../../hooks/useAuth";
+import { Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchUserPosts } from "../../../redux/slices/postSlice";
 
 const Profile = () => {
-  const [isEdit, setIsEdit] = useState(false);
+  const { user, isAuth } = useAuth();
+  const { userPosts } = useSelector((state) => state.posts.posts);
+  const dispatch = useDispatch();
+  const date = user ? new Date(user.createdAt) : "00.00.00";
+
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchUserPosts(user._id));
+    }
+  }, [user]);
+
+  if (!isAuth) {
+    return <Navigate to={"/"} />;
+  }
   return (
     <section className={styles.profile}>
       <div className="container">
         <div className={styles.profileHeader}></div>
         <div className={styles.profileInfo}>
           <h2 className={`heading ${styles.title}`}>Your profile info</h2>
-          <div className={styles.profileData}>
-            <span>{userInfo.email}</span>
-            <span>Created at: {userInfo.createdAt}</span>
-            <span>Count posts: {userInfo.posts}</span>
-          </div>
 
-          {!isEdit ? (
-            <button
-              onClick={() => setIsEdit((prev) => !prev)}
-              className={`btn ${styles.btnChange}`}
-            >
-              Change profile data
-            </button>
-          ) : (
-            <button
-              onClick={() => setIsEdit((prev) => !prev)}
-              className={`btn ${styles.btnChange}`}
-            >
-              Cancel edit form
-            </button>
+          {user && userPosts && (
+            <>
+              <div className={styles.profileImg}>
+                <img
+                  src={`${import.meta.env.VITE_API_URL}${user.avatarUrl}`}
+                  alt="avatar image"
+                />
+              </div>
+              <div className={styles.profileData}>
+                <span>{user.email}</span>
+                <span>{user.fullName}</span>
+                <span>
+                  Created at:{" "}
+                  {date.toLocaleDateString("ru-RU", { timeZone: "UTC" })}
+                </span>
+                <span>Count posts: {userPosts.length}</span>
+              </div>
+            </>
           )}
-
-          {isEdit && <ProfileEditForm />}
         </div>
       </div>
     </section>

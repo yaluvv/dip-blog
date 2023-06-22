@@ -6,7 +6,7 @@
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+    box-sizing: border-box;
 }
 
 html {
@@ -70,7 +70,9 @@ main {
     margin: 0 auto;
     padding: 0 15px;
 }
-
+.w-full {
+    width: 100%;
+}
 .btn {
     outline: none;
     border: none;
@@ -91,4 +93,8 @@ main {
 }
 .heading {
     font-size: 42px;
+
+    @media screen and (max-width: 556px) {
+        font-size: 34px;
+    }
 }

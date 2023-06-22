@@ -2,19 +2,44 @@
     padding: 70px 0;
 
     &Item {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
         > img {
+            height: 400px;
+            object-fit: cover;
             border-radius: 10px;
             margin-bottom: 20px;
         }
-        > h2 {
-            font-size: 36px;
+        &NotImg {
+            width: 100%;
+            height: 400px;
+            background-color: #d4d4d4;
+            border-radius: 10px;
+            position: relative;
             margin-bottom: 20px;
+
+            &::before {
+                content: "No image";
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                position: absolute;
+                font-size: 40px;
+            }
+        }
+        &Title {
+            display: inline-block;
+            font-size: 36px;
+            margin-bottom: 40px;
         }
         > p {
             font-size: 18px;
             margin-bottom: 20px;
         }
         &Author {
+            margin-top: 40px;
             display: flex;
             align-items: center;
             column-gap: 10px;
@@ -31,5 +56,19 @@
                 text-transform: uppercase;
             }
         }
+    }
+    .editBtn {
+        border: none;
+        padding: 5px;
+        border-radius: 10px;
+        background: #fff;
+        display: inline-flex;
+        gap: 5px;
+        align-items: center;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: initial;
+        transition: all 0.3s ease;
     }
 }

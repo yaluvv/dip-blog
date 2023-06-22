@@ -7,6 +7,7 @@ export const authService = {
             return data
         } catch (err) {
             console.error(err);
+            return { name: err.name, code: err.code, message: err.response.data.message }
         }
     },
     signup: async (payload) => {
@@ -15,6 +16,7 @@ export const authService = {
             return data
         } catch (err) {
             console.error(err);
+            return { name: err.name, code: err.code, message: err.response.data.message }
         }
     },
     me: async () => {
@@ -25,6 +27,7 @@ export const authService = {
             if (err.response.data.message === 'Нет доступа') {
                 return null
             }
+            return { name: err.name, code: err.code, message: err.response.data.message }
         }
     }
 }

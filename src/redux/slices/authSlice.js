@@ -1,19 +1,50 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { authService } from "../../services/auth.service";
 
-export const authLogin = createAsyncThunk('auth/authLogin', async (payload) => {
-    const data = await authService.login(payload)
-    return data
+export const authLogin = createAsyncThunk('auth/authLogin', async (payload, { rejectWithValue }) => {
+    try {
+        const data = await authService.login(payload)
+
+        if (data.name === 'AxiosError') {
+            return rejectWithValue(data)
+        }
+
+        return data
+    } catch (err) {
+        console.error(err);
+    }
+
 })
 
-export const authSignup = createAsyncThunk('auth/authSignup', async (payload) => {
-    const data = await authService.signup(payload)
-    return data
+export const authSignup = createAsyncThunk('auth/authSignup', async (payload, { rejectWithValue }) => {
+    try {
+        const data = await authService.signup(payload)
+
+        if (data.name === 'AxiosError') {
+            return rejectWithValue(data)
+        }
+
+        return data
+
+    } catch (err) {
+        console.error(err);
+    }
+
 })
 
-export const authMe = createAsyncThunk('auth/me', async () => {
-    const data = await authService.me()
-    return data
+export const authMe = createAsyncThunk('auth/me', async (_, { rejectWithValue }) => {
+    try {
+        const data = await authService.me()
+
+        if (data.name === 'AxiosError') {
+            return rejectWithValue(data)
+        }
+
+        return data
+
+    } catch (err) {
+        console.error(err);
+    }
 })
 
 const initialState = {

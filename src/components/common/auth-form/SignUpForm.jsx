@@ -46,7 +46,7 @@ const SignUpForm = ({ setFormType }) => {
   };
   const onSubmit = async (data) => {
     try {
-      if (!Boolean(getValues("avatarUrl"))) {
+      if (!getValues("avatarUrl").length) {
         const { email, fullName, password } = data;
 
         const { payload } = await dispatch(

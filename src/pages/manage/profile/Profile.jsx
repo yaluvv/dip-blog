@@ -29,12 +29,20 @@ const Profile = () => {
 
           {user && userPosts && (
             <>
-              <div className={styles.profileImg}>
-                <img
-                  src={`${import.meta.env.VITE_API_URL}${user.avatarUrl}`}
-                  alt="avatar image"
-                />
-              </div>
+              {user.avatarUrl && (
+                <div className={styles.profileImg}>
+                  <img
+                    src={`${import.meta.env.VITE_API_URL}${user.avatarUrl}`}
+                    alt="avatar image"
+                  />
+                </div>
+              )}
+              {!user.avatarUrl && (
+                <div className={styles.profileNoImg}>
+                  <span></span>
+                </div>
+              )}
+
               <div className={styles.profileData}>
                 <span>{user.email}</span>
                 <span>{user.fullName}</span>

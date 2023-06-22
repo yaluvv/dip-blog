@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { authLogin } from "../../../redux/slices/authSlice";
 import { useAuth } from "../../../hooks/useAuth";
 import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const LoginForm = ({ setFormType }) => {
   const {
@@ -19,10 +20,18 @@ const LoginForm = ({ setFormType }) => {
   const { isAuth } = useAuth();
 
   const onSubmit = async (data) => {
-    const { payload } = await dispatch(authLogin(data));
+    try {
+      const { payload } = await dispatch(authLogin(data));
 
-    if ("token" in payload) {
-      window.localStorage.setItem("token", payload.token);
+      if (payload?.name === "AxiosError") {
+        toast.warn(payload.message);
+      } else {
+        if ("token" in payload) {
+          window.localStorage.setItem("token", payload.token);
+        }
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 

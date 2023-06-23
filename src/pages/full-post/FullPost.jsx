@@ -3,8 +3,7 @@ import styles from "./FullPost.module.scss";
 import { useEffect, useState } from "react";
 import { postService } from "../../services/post.service";
 import ReactMarkdown from "react-markdown";
-import EditIcon from "@mui/icons-material/Edit";
-import { Link } from "react-router-dom";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useAuth } from "../../hooks/useAuth";
 import ActionButtons from "../../components/Post/ActionButtons";
 
@@ -51,7 +50,10 @@ const FullPost = () => {
             <p>{postData.user.fullName}</p>
             <span>in</span>
             <p>{postData.tags.join(", ")}</p>
-            <span>{postData.viewsCount}</span>
+            <div className={styles.fullPostViews}>
+              <VisibilityIcon />
+              <span>{postData.viewsCount}</span>
+            </div>
           </div>
         </div>
       </div>

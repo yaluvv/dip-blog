@@ -71,4 +71,10 @@
         width: initial;
         transition: all 0.3s ease;
     }
+    &Views {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-left: auto;
+    }
 }
